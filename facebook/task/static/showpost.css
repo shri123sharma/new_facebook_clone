@@ -1,0 +1,129 @@
+body {
+       background-color: #18b5d8;
+       font-family: San Francisco, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif;
+     }
+h1{
+       text-align: center;
+}
+     
+     
+     .frame__container {
+       display: flex;
+       flex-direction: column;
+       margin: auto;
+       width: 502px;
+       
+       border: 1px solid #ced0d4;
+       border-radius: 5px;
+       background-color: #fff;
+       box-sizing: border-box;
+     }
+     
+     .frame__column {
+       display: flex;
+       flex-direction: column;
+     }
+     
+     .frame__headline {
+       display: flex;
+       align-items: flex-start;
+       justify-content: flex-start;
+       padding: 12px 12px 0;
+       margin-bottom: 11px;
+     }
+     
+     .headline__image {
+       height: 40px;
+       width: 40px;
+       margin-right: 8px;
+     }
+     
+     .headline__subtitle {
+       color: #90949c;
+       font-size: 12px;
+       letter-spacing: -0.24px;
+       line-height: 16.08px;
+       margin: 0;
+       
+       
+     }
+     
+     .headline__title {
+       color: #365899;
+       font-size: 14px;
+       font-weight: bold;
+       letter-spacing: -0.24px;
+       line-height: 19.32px;
+       word-wrap: break-word;
+       margin: 0 0 2px;
+     }
+     
+     .headline__world {
+       height: 12px;
+       width: 12px;
+     }
+     
+     .frame__content {
+      margin: 7px 12px; 
+     }
+     
+     .frame__text {
+       margin: 0;
+     }
+     
+     .frame__text--large {
+       margin: 0;
+       font-size: 24px;
+       line-height: 28px;
+     }
+     
+     .frame__text--small {
+       margin: 0;
+       font-size: 14px;
+       line-height: 19.32px;
+     
+     }
+     
+     .frame__footer {
+       display: flex;
+       border-top: 1px solid #e1e2e3;
+       padding: 4px 12px;
+     
+     }
+     
+     .text__social {
+       color: #7f7f7f;
+       font-size: 12px;
+       font-weight: bold;
+       line-height: 14px;
+       margin: 0;
+     
+     }
+     
+     .footer__likes, 
+     .footer__comments,
+     .footer__share,
+     .footer__post-as{
+       display: flex;
+       padding: 4px 0 4px;
+       margin-right: 20px;
+     }
+     
+     .footer__image {
+       height: 14px;
+       margin: 0 6px -3px 0;
+     
+     }
+     
+     .footer__image--not-first {
+         margin-left: 9px;
+     }
+     
+     .footer__post-as-image {
+       height: 16px;
+     }
+     
+     .footer__post-as {
+       margin-right: 0;
+       margin-left: auto;
+     }

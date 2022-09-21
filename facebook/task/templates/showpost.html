@@ -1,0 +1,44 @@
+{% load static %}
+
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <link rel="stylesheet" href="{% static 'showpost.css' %}">
+       <title>postShow</title>
+</head>
+<body>
+  <h1>All Upload Post Detail</h1>
+  <strong><a href="{% url 'page'%}" ><button style="margin-left: 1200px;">Back To Home</button></a></strong>
+  <hr>
+  <div class="frame__container">
+    <div class="frame__headline">
+      <div class="frame__column">
+        <p class="headline__title">
+        </p>
+        <strong></strong>
+        <p class="headline__subtitle">
+          Published by Test Person (Test)<img class="headline__world" src="https://www.facebook.com/rsrc.php/v3/yD/r/-ZGO_vK2ube.png">
+        </div>
+      </div>
+      <div class="frame__content">
+        <p class="frame__text--small">This is Content</p>
+      </div>
+      <div class="frame__content">
+                {% for post in posts %}
+                     <div class="name">This is Caption Related Current Post <strong>{{post.caption}}</strong></div>
+                     <div class="posts">
+                      <img class="frame__image" src="{{post.file.url}}" width="479px" height="479px" alt="posts">
+                
+                {% endfor %}
+              
+          </body>
+</html>
+          <!-- <div class="showpost">
+                 {% for post in posts %}
+                 <div class="name">{{post.file.name}}</div>
+                 <div class="posts">
+                 <img src="{{post.file.url}}" width="500px" height="500px" alt="posts"></div>
+                 {% endfor %}
+          </div> -->

@@ -1,0 +1,188 @@
+{% load static %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{% static 'profile.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css"  -->
+  
+  <title>profile upload</title>
+</head>
+
+<body>
+  <main>
+    <header>
+      <div class="tb">
+        <div class="td" id="logo">
+        
+        </div>
+        
+        <div class="td" id="search-form">
+          <!-- search Box -->
+          <form method="get" action="#">
+            <input type="text" placeholder="Search SocialBook">
+            <button type="submit"><i class="material-icons">search</i></button>
+          </form>
+        </div>
+        <!-- website logo name -->
+        <div class="td" id="f-name-l"><a href="{% url 'page' %}"><span>SocialBook</span></a>
+       
+        </div>
+        
+        <div class="td" id="i-links">
+          <div class="tb">
+            <div class="td" id="m-td">
+            </div>
+            <div class="td">
+              {% comment %} <a href="#" id="p-link">
+                <img src="https://imagizer.imageshack.com/img921/3072/rqkhIb.jpg">
+              </a> {% endcomment %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div id="profile-upper">
+      <div id="profile-banner-image">
+        <!-- show cover image -->
+        {%  if profiledata.cover_img %}
+        <img src="{{profiledata.cover_img.url}}" alt="Banner image" height="1000" width="300" >
+        {% endif %}
+      </div>
+
+      <div id="profile-d">
+        <form action="/profile/" method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div id="" style="width: 200px;height: 300px; ">
+            <!-- show profile pic -->
+            {% if profiledata.img %}
+            <img src="{{profiledata.img.url}}" height="150px" width="323px">
+            {% else %}
+            {% endif %}
+            {% comment %} <img src="<i class="fa fa-user" aria-hidden="true"></i>" alt="Avatar" class="avatar"> {% endcomment %}
+
+            <!-- upload profile pic -->
+            {% if  not  profiledata %}
+            <input type="file" name="profilefile" id="profileimg" style="display:none;" >
+            <label for="profileimg"><i class="fa fa-camera" style="font-size:30px; margin-left: 70px;">Add Profile</i></label>
+            {% else %}
+            <input type="file" name="profilefile" id="profileimg" style="display:none;" >
+            <label for="profileimg"><i class="fa fa-camera" style="font-size:30px; margin-left: 70px;">Update Profile</i></label>
+            {% endif %}
+          </div>
+          <!-- upload user name -->
+          <div id="u-name">{{user}}</div>
+          <div class="tb" id="m-btns">
+          </div>
+
+          <!--  upload cover image -->
+          {% if not  profiledata %}
+          <input type="file" name="coverimage" style="display:none ;" id="cover" >
+          <label for="cover" id="edit-profile"><i class="fa fa-camera" style="font-size:30px; margin-left: 80px;"></i><i class="material-icons">Add cover Photos</i></label>
+          {% else %}
+          <input type="file" name="coverimage" style="display:none ;" id="cover" >
+          <label for="cover" id="edit-profile"><i class="fa fa-camera" style="font-size:30px; margin-left: 80px;"></i><i class="material-icons">Edit Cover Image</i></label>
+          {% endif %}
+        </div>
+        <div id="black-grd"></div>
+       
+        
+      </div>
+      <div id="main-content">
+        <div class="tb">
+          <div class="td" id="2-col">
+            <div class="l-cnt">
+              <div class="cnt-label">
+                <i class="l-i" id="l-i-i"></i>
+                <span>Intro</span>
+
+                
+                <!-- Edit Bio -->
+                <a href="{% url 'proupdate' %}"><i class="fa fa-edit" style="margin-left: 1100px; font-size: large; font-weight: bold;  font-style: italic;">Edit Bio</i></a>
+              </div>
+
+              <!-- delete profile -->
+
+              <input type="submit" style="display: none;"><a href="{% url 'profiledelete' id=profiledata.id %}" style="margin-left:1100px;"><i
+              class="fa fa-trash" aria-hidden="true">Delete Profile</i></a>
+
+            <div id="i-box">
+              <div id="intro-line">
+                <!-- upload and show bio,hobbies,detail -->
+                    <label for="bio" id="bio">Bio</label><br>
+                    <br>
+                    <p><strong>{{profiledata.bio}}</strong></p>
+                    <br>
+                    <br>
+                    <label for="bio" id="bio">detail</label><br>
+                    <br>
+                    <p><strong>{{profiledata.detail}}</strong></p>
+                    <br>
+                    <br>
+                    <label for="bio" id="bio">hobbies</label>
+                    <br>
+                    <p><strong>{{profiledata.hobbies}}</strong></p>
+                    <br>
+                    <br>
+                  {% if not profiledata %}
+                  <button type="submit" style="background-color: rgb(27, 13, 186);font-size: larger;font-family: 'Times New Roman', Times, serif  ;">Submit</button>
+                  {% else %}
+                  <button style="font-size:24px">Click Here After Update<i class="fa fa-edit"></i></button>
+                  {% endif %}
+                </form>
+              </div>
+              <div id="u-occ">I love making applications.</div>
+              <div id="u-loc"><i class="material-icons">location_on</i><a href="https://goo.gl/maps/cyMptPuGVrXu27o39"> Officer Colony Indore</a>, <a href="">India</a>
+              </div>
+            </div>
+          </div>
+          
+              </div>
+            </div>
+          </div>
+          <!-- user upload post -->
+          <div class="post">
+            <div class="tb">
+              {% for post in posts %}
+              <a href="{% url 'showpost' %}" class="td p-p-pic">
+                {% if profiledata.img.url %}
+                <img src="{{profiledata.img.url}}"
+                {% endif %}
+                alt="profile pic"></a>
+                <div class="td p-r-hdr">
+                  <div class="p-u-info">
+                    <a href="{% url 'profile' %}">{{user.username}}</a><br><strong>{{post.caption}}</strong><a href=""></a>
+                    <br>
+                    <i class="material-icons">Post date</i>
+                    <br>
+                    <span>{{post.post_date}}</span>
+                    <br>
+                  </div>
+                  <div class="p-dt">
+                  </div>
+                </div>
+            </div>
+            <a href="#" class="p-cnt-v">
+              {% if post.file%}
+              <img src="{{post.file.url}}"  alt=" Post Not show" width="100px" height="400px">
+              {% endif %}
+            </a>
+            {% endfor %}
+
+          {% comment %} friends request and check {% endcomment %}
+          {% block title %}
+          
+          {% endblock title %}  
+            <div id="t-box">
+              <a href="#">Privacy</a> <a href="#">Terms</a> <a href="#">Advertising</a> <a href="#">Ad Choices</a> <a
+              href="#">Cookies</a> <span id="t-more">More<i class="material-icons">arrow_drop_down</i></span>
+              <div id="cpy-nt">Facebook &copy; <span id="curr-year"></span></div>
+            </div>
+  </main>
+</body>
+
+</html>

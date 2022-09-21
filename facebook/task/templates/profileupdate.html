@@ -1,0 +1,36 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/profile/" method="post">
+        {% csrf_token %}   
+      <P><strong>Bio Update section</strong></P>
+            <!-- bio input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form4Example1" class="form-control" name="bio" placeholder="{{profiledata.bio}}"/>
+              <label class="form-label" for="form4Example1">Bio</label>
+            </div>
+          
+            <!-- detail input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form4Example2" class="form-control"  name="detail" placeholder="{{profiledata.detail}}"/>
+              <label class="form-label" for="form4Example2">Detail</label>
+            </div>
+          
+            <!-- hobbies input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form4Example2" class="form-control"  name="hobbies" placeholder="{{profiledata.hobbies}}"/>
+              <label class="form-label" for="form4Example3">Hobbies</label>
+            </div>
+          
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">Update</button>
+          </form>
+   
+</body>
+</html>

@@ -1,0 +1,88 @@
+{% load static %}
+<html>
+	<head>
+		<title>SocialBook Homepage</title>
+		<link rel="stylesheet" type="text/css" href="{% static 'home.css' %}">
+	</head>
+	
+<body>
+	<form action="/signin/" method="post">
+		{% csrf_token %}
+		<h3>
+		{% if messages %}
+		<ul class="messages">
+		{% for message in messages %}
+		<li><script>alert("{{ message }}")</script></li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+		</h3>
+		<!-- navbar -->
+		<div class="nav">    
+			<div class="inner mg">
+				<!-- logo area -->
+				<div class="logo">
+				<img src="https://i.postimg.cc/Y9nZymQq/logo2.png">	
+			</div>
+			<!-- login area -->
+			<table class="table">
+				<tr>
+					<td>Username</td>
+					<td>Password</td>
+				</tr>
+				<tr>
+					<td><input type="Username"id="lg" name="username"></td>
+					<td><input  type="Password" id="lg" name="password"></td>
+					<td><input type="submit" value="Log in"></td>
+				</tr>
+				<tr>
+					<td></td>
+					
+					<td></td>
+				</tr>
+			</table>
+		</div>	
+	</div>
+</form>
+</div><!-- end navigation -->
+
+	<!-- main page area -->
+	<form action="/register/" method="post">
+		{% csrf_token %}
+	<div class="main mg">
+		<div class="left">
+			<h3>Facebook helps you connect and share with the people in your life.</h3>
+			<img id="cimg" src="https://i.imgur.com/p4acFUi.png">
+                     
+		</div>
+		<!-- signup form -->
+		
+		<!-- message show -->
+		<div class="right">
+			<h1>Sign Up</h1>
+			<h3>
+				{% if message %}
+				<ul class="messages">
+				{% for message1, opt in message.items %}
+				<li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ opt }} </li>
+				{% endfor %}
+				</ul>
+				{% endif %}
+			</h3>
+            <input type="text" placeholder="Username" name="username" maxlength="150" required>
+			<input type="text" placeholder="First name" name="first_name" required>
+			<input type="text" placeholder="last name" name="last_name" required>
+			<input type="text" placeholder="Email" name="email" required>
+			<input type="password" placeholder="New Password" name="password1" required>
+            <input type="password" placeholder="Confirm Password" name="password2" required>
+			
+			<p class="fs_14">By clicking Sign Up, you agree to our <a href="">Terms</a>, <a href="">Data Policy</a> and <a href="">Cookies Policy</a>. You may receive SMS Notifications from us and can opt out any time</p>
+
+			<input type="submit" value="Sign Up" onclick="Submitt()"><hr><br>
+			
+		</div>
+	</div>
+</form>
+
+</body>
+</html>

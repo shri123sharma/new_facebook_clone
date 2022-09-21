@@ -1,0 +1,104 @@
+{% load static %}
+<html lang="en">
+<head>
+       <meta charset="UTF-8">
+       <meta http-equiv="X-UA-Compatible" content="IE=edge">
+       <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       <title>Friend list</title>
+       <link rel="stylesheet" href="{% static 'friend.css' %}">
+       <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-replace-svg="nest"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="top">
+      <h2>Friend's List</h2>
+    </div>
+    <div>
+      <a href="{% url 'page' %}"><button style="margin-left:1200px;">Back To Home</button></a>
+    </div>
+    
+    {% block content %}
+    <h1>login user:{{request.user}}</h1>
+    <h1>show friend list in login user</h1>
+    {% for friend in profiledata.get_friends %}
+    <h3>{{friend}}</h3>
+    {% endfor %}
+    Friends number:{{profiledata.get_friends_no}}
+    {% endblock content %}
+    <br>
+    <br>
+  
+    <h1>Request send in users</h1>
+    {% for request in  show_request %}
+    <h4>{{request}}</h4>
+    {% endfor %}  
+    <br>
+    <br>
+
+    <h1>Request Send Users</h1>
+    {% for friend in users %}
+    <div class="row">
+      <div class="shadow">
+        <div class="col-sm-12">
+          <div class="col-sm-2">
+            <img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px">
+          </div>
+          <div class="col-sm-8">
+            <h4><a href="#">{{friend}}</a></h4>
+            <!-- <p><a href="#">4 mutual friends</a></p> -->
+          </div>
+          <div class="col-sm-2">
+            <form action="{% url 'friend' %}" method="post">
+              {% csrf_token %}
+            <input type="text" name="friend"  id="friend" value="{{friend.id}}" style="display:none;"><br>
+            <label for="friend">Friend request</label>
+            
+            <label for="status">Status</label>
+  
+            <input type='checkbox' name="status" id="status" value="send"><br>
+            <button type="submit">Request Send</button>
+          </form>
+          </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr />
+        {% endfor  %}
+<br>
+<br>
+<br>
+<br>
+<h1>User Friend Request</h1>
+{% for friend_request in request %}
+<div class="row">
+  <div class="shadow">
+    <div class="col-sm-12">
+      <div class="col-sm-2">
+        <img src="https://www.infrascan.net/demo/assets/img/avatar5.png" class="img-circle" width="60px">
+      </div>
+      <div class="col-sm-8">
+        <h4><a href="#">{{friend_request}}</a></h4>
+      </div>
+      <div class="col-sm-2">
+        <form action="/accept/" method="post">
+          {% csrf_token %}
+          
+        <input type="text" name="friend"  id="friend" value="{{friend_request.id}}"><br>
+        <label for="friend">Friend request</label>
+
+        <label for="status">Status</label>
+        <input type='checkbox' name="status" id="status" value="accepted"><br>
+
+        <input type="submit" value="submit">
+      </form>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    <hr />
+    {% endfor  %}    
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

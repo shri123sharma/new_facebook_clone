@@ -1,0 +1,114 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'comment.css' %}">
+    <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" data-auto-replace-svg="nest"></script>
+    <title>comment section</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-md-12" id="fbcomment">
+            <div class="header_comment">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        <span class="count_comment">{{comment_count}} Comments</span>
+                        <a href="{% url 'page' %}" style="margin-left: 1000px;"><button>Back To Home</button></a>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <span class="sort_title">{{postcomment.comment_date}}</span>
+                        <!-- <select class="sort_by">
+                            <option>Top</option>
+                            <option>Newest</option>
+                            <option>Oldest</option>
+                        </select> -->
+                    </div>
+                </div>
+            </div>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="body_comment">
+                    <div class="row">
+                        <div class="avatar_comment col-md-1">
+                            <img src="{{profile.img.url}}" alt="avatar" />
+                        </div>
+                        <div class="box_comment col-md-11">
+                            <textarea class="commentar" placeholder="Add a comment..." name="comment"
+                                value="{{comment}}"></textarea>
+                            <div class="box_post">
+                                <div class="pull-left">
+                                    <input type="checkbox" id="post_fb" />
+                                    <label for="post_fb">Also post on Facebook</label>
+                                </div>
+                                <div class="pull-right">
+                                    <span>
+                                        <img src="https://static.xx.fbcdn.net/rsrc.php/v1/yi/r/odA9sNLrE86.jpg"
+                                            alt="avatar" />
+                                        <i class="fa fa-caret-down"></i>
+                                    </span>
+                                    <button type="submit" value="1">Post</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+            <div class="row">
+                <ul id="list_comment" class="col-md-12">
+                    <!-- Start List Comment 1 -->
+                    {% for data in comment %}
+                    <li class="box_result row">
+                        <div class="avatar_comment col-md-1">
+                            <img src="{{profile.img.url}}" alt="avatar" />
+                        </div>
+                        <div class="result_comment col-md-11">
+                            <h4>{{data.user.username}}</h4>
+                            <p>{{data.comment}}
+                            </p>
+
+                            <div class="tools_comment">
+
+                                <form action="/commentlike/" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name='comment_id' value="{{data.id}}">
+                                    <br>
+                                    {% if user not in data.commentliked.all %}
+                                    <button type="submit" class="btn btn-success unlike">UnLike</button>
+                                    {% else %}
+                                    <button type="submit" class="btn btn-danger like">Like</button>
+                                    {% endif %}
+                                    <br>
+                                    <strong>{{data.commentliked.all.count}}Likes</strong>
+                                </form>
+                                <!-- DELETE OBJECTS POST -->
+                                <input type="submit" style="display: none;"><a
+                                    href="{% url 'commentdelete' id=data.id %}"><i class="fa fa-trash"
+                                        aria-hidden="true"></i></a>
+                                <span aria-hidden="true"> Comment Delete</span>
+
+                                <!-- <a class="replay" href="#">Reply</a>
+                                <span aria-hidden="true"> · </span>
+                                <i class="fa fa-thumbs-o-up"></i> <span class="count"></span> -->
+                                <span aria-hidden="true"> · </span>
+                                <span>{{data.comment_date}}</span>
+                            </div>
+                           
+                        </div>
+                        </form>
+                    </li>
+                    {% endfor %}
+
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>
