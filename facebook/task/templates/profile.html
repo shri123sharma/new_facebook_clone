@@ -149,7 +149,7 @@
             <div class="tb">
               {% for post in posts %}
               <a href="{% url 'showpost' %}" class="td p-p-pic">
-                {% if profiledata.img.url %}
+                {% if profiledata.img %}
                 <img src="{{profiledata.img.url}}"
                 {% endif %}
                 alt="profile pic"></a>

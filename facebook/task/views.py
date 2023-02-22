@@ -123,10 +123,10 @@ class Page(generic.View):
             userpost = Post.objects.exclude(postuser__in=others_user).order_by('-post_date')
             # import pdb;pdb.set_trace()
             post_id = request.POST.get('post_id')
-            post_profile=Post.objects.filter(postuser=request.user).first().post_profile
+            # post_profile=Post.objects.filter(postuser=request.user).first().post_profile
             profiledata=ProfileUpload.objects.filter(profileuser=request.user).first()
             likes = PostLikes.objects.filter(user=request.user,post_id=post_id)
-            return render(request, 'page.html', {'userpost': userpost, 'likes': likes,'profiledata':profiledata,'post_profile':post_profile})
+            return render(request, 'page.html', {'userpost': userpost, 'likes': likes,'profiledata':profiledata,})
         else:
             return redirect('signin')
     def post(self, request, *args, **kwargs):
