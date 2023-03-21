@@ -24,5 +24,6 @@ urlpatterns = [
        path('commentdelete/<int:id>/',views.deletecomment,name='commentdelete'),
        path('searchbar/',views.search_bar,name='searchbar'),
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] 
+# + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
